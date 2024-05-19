@@ -8,14 +8,15 @@ from model import MultilabelModel
 from trainer import Trainer
 import joblib
 
+MODEL_PATH = "../model/"
 MAX_SEQ_LEN = 350
 
 def flatten(xss):
     return [x for xs in xss for x in xs]
 
 def make_prediction(title: str, abstract: str):
-    t = Trainer.load("../model/s-deberta-v3_10.ckpt")
-    tokenizer = AutoTokenizer.from_pretrained("../model/tokenizer")
+    t = Trainer.load(MODEL_PATH + "b-deberta-v3_14.ckpt")
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH + "tokenizer")
 
     test = pd.DataFrame({"titles": [title], "abstracts": [abstract]})
 

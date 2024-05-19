@@ -2,14 +2,14 @@ import torch
 from torch.nn import BCEWithLogitsLoss
 from torch.optim import AdamW
 from tqdm.notebook import tqdm
-from sklearn.metrics import f1_score, multilabel_confusion_matrix
+from sklearn.metrics import f1_score
 from torcheval.metrics.functional import multilabel_accuracy
 
 from model import MultilabelModel
 
 class Trainer():
 
-    def __init__(self, config):
+    def __init__(self, config, save_epoch=True):
         self.config = config
         self.n_epochs = config['n_epochs']
         self.optimizer = None
@@ -18,6 +18,7 @@ class Trainer():
         self.loss_fn = BCEWithLogitsLoss()
         self.device = config['device']
         self.verbose = config.get('verbose', True)
+        self.save_epoch = save_epoch
 
     def fit(self, model, train_dataloader, val_dataloader):
         self.model = model.to(self.device)
@@ -28,6 +29,9 @@ class Trainer():
             print(f"Epoch {epoch + 1}/{self.n_epochs}")
             self.train_epoch(train_dataloader)
             self.val_epoch(val_dataloader)
+
+            if self.save_epoch:
+                self.save(f"/model/b-deberta-v3_{epoch + 1}.ckpt")
         
         return self.model.eval()
 
@@ -82,8 +86,6 @@ class Trainer():
         print(f"Loss: {loss}")
         print(f"Accuracy: {acc}")
         print(f"F1: {f1}")
-        print("Confustion matrix:")
-        print(multilabel_confusion_matrix(true, pred))
 
     def predict(self, test_dataloader):
         if not self.model:

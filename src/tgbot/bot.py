@@ -11,7 +11,7 @@ data = {'title': '', 'abstract': ''}
 TITLE, ABSTRACT, PREDICT = range(3)
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}! It seems like you want me to tag your paper. Write the title of your paper:')
+    await update.message.reply_text(f'Greetings {update.effective_user.first_name}! It seems like you want me to tag your paper. Write the title of your paper:')
 
     return TITLE
 
