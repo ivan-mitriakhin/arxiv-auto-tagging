@@ -19,3 +19,13 @@ This project presents a dataset consiting of 536,914 collected research papers s
 [./notebooks](https://github.com/ivan-mitriakhin/arxiv-auto-tagging/tree/main/notebooks) stores notebooks that contain information about data collection, grouping, etc.
 
 [./src](https://github.com/ivan-mitriakhin/arxiv-auto-tagging/tree/main/src) stores model and utility files as well as the notebook for training the model.
+
+[./src/tgbot](https://github.com/ivan-mitriakhin/arxiv-auto-tagging/tree/main/src) includes telegram bot script.
+
+## Telegram bot
+
+You can utilize the [telegram bot](https://t.me/arxiv_tagging_bot) to tag your paper.
+
+An example of inference:
+
+![image](https://github.com/ivan-mitriakhin/arxiv-auto-tagging/blob/main/img/inference.png)
